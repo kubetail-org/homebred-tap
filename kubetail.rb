@@ -57,4 +57,12 @@ class Kubetail < Formula
   def post_install
     generate_completions_from_executable(bin/"kubetail", "completion")
   end
+
+  test do
+    # Verify that the kubetail binary is executable and returns expected output for --version
+    assert_match version.to_s, shell_output("#{bin}/kubetail --version")
+  
+    # Alternatively, you can test with the --help flag
+    assert_match "Usage:", shell_output("#{bin}/kubetail --help")
+  end
 end
