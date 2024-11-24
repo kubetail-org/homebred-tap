@@ -17,9 +17,7 @@ class Kubetail < Formula
   depends_on "pnpm" => :build
 
   def install
-    version = self.class.url.match(/cli\/v(.*?)\.tar\.gz/)[1]
-    system "bash", "./scripts/set-cli-version.sh", version
-    system "make", "build"
+    system "make", "build", "VERSION_FROM_URL", self.class.url
     bin.install "bin/kubetail"
     generate_completions_from_executable(bin/"kubetail", "completion")
   end
