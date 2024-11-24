@@ -17,7 +17,7 @@ class Kubetail < Formula
   depends_on "pnpm" => :build
 
   def install
-    system "make", "build", "VERSION_FROM_URL=#{self.class.url}"
+    system "make", "build", "VERSION_FROM_URL=#{self.url}"
     bin.install "bin/kubetail"
     generate_completions_from_executable(bin/"kubetail", "completion")
   end
