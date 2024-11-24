@@ -5,8 +5,6 @@ class Kubetail < Formula
   sha256 "84a868565c664d10c39afa782f1c634c8dbf808058c390c5b5727b0c46d9a3c1"
   license "Apache-2.0"
 
-  resource_version = url.match(/cli\/v(.*?)\.tar\.gz/)[1]
-
   livecheck do
     url :stable
     regex(%r{^cli/v?(\d+(?:\.\d+)+)$}i)
@@ -18,7 +16,8 @@ class Kubetail < Formula
   depends_on "pnpm" => :build
 
   def install
-    system "bash", "./scripts/set-cli-version.sh", self.class.resource_version
+    version = self.class.url.match(/cli\/v(.*?)\.tar\.gz/)[1]
+    system "bash", "./scripts/set-cli-version.sh", version
     system "make", "build"
     bin.install "bin/kubetail"
     generate_completions_from_executable(bin/"kubetail", "completion")
