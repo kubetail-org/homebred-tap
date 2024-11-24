@@ -10,6 +10,7 @@ class Kubetail < Formula
     regex(%r{^cli/v?(\d+(?:\.\d+)+)$}i)
   end
 
+  depends_on "bash" => :build
   depends_on "go" => :build
   depends_on "make" => :build
   depends_on "node" => :build
